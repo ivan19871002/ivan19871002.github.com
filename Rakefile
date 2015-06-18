@@ -49,6 +49,7 @@ task :post do
   category = ENV["category"] || ""
   category = "\"#{category.gsub(/-/,' ')}\"" if !category.empty?
   slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+  link= (ENV['date'] ? Time.parse(ENV['date']) : Time.now).strftime('%Y/%m/%d')
   begin
     date = (ENV['date'] ? Time.parse(ENV['date']) : Time.now).strftime('%Y-%m-%d')
   rescue => e
@@ -63,10 +64,12 @@ task :post do
   puts "Creating new post: #{filename}"
   open(filename, 'w') do |post|
     post.puts "---"
-    post.puts "layout: post"
     post.puts "title: \"#{title.gsub(/-/,' ')}\""
+    post.puts "author: Ivan"
+    post.puts "layout: post"
+    post.puts "permalink: /#{link}/#{slug}"
     post.puts 'description: ""'
-    post.puts "category: #{category}"
+    post.puts "categories: #{category}"
     post.puts "tags: #{tags}"
     post.puts "---"
   end
