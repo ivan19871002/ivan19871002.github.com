@@ -69,7 +69,6 @@ task :post do
     post.puts "category: #{category}"
     post.puts "tags: #{tags}"
     post.puts "---"
-    post.puts "{% include JB/setup %}"
   end
 end # task :post
 
@@ -94,7 +93,6 @@ task :page do
     post.puts "title: \"#{title}\""
     post.puts 'description: ""'
     post.puts "---"
-    post.puts "{% include JB/setup %}"
   end
 end # task :page
 
@@ -138,8 +136,6 @@ namespace :theme do
         page.puts File.read(settings_file) if File.exist?(settings_file)
         page.puts "layout: default" unless File.basename(filename, ".html").downcase == "default"
         page.puts "---"
-        page.puts "{% include JB/setup %}"
-        page.puts "{% include themes/#{theme_name}/#{File.basename(filename)} %}" 
       end
     end
     
