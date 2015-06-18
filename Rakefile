@@ -45,9 +45,10 @@ desc "Begin a new post in #{CONFIG['posts']}"
 task :post do
   abort("rake aborted: '#{CONFIG['posts']}' directory not found.") unless FileTest.directory?(CONFIG['posts'])
   title = ENV["title"] || "new-post"
-  tags = ENV["tags"] || "[]"
+  tags = ENV["tags"] || ""
   category = ENV["category"] || ""
-  category = "\"#{category.gsub(/-/,' ')}\"" if !category.empty?
+  category = "#{category.gsub(/ /,' - ')}" if !category.empty?
+  tags = "#{tags.gsub(/ /,' - ')}" if !tags.empty?
   slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   link= (ENV['date'] ? Time.parse(ENV['date']) : Time.now).strftime('%Y/%m/%d')
   begin
@@ -67,10 +68,10 @@ task :post do
     post.puts "title: \"#{title.gsub(/-/,' ')}\""
     post.puts "author: Ivan"
     post.puts "layout: post"
-    post.puts "permalink: /#{link}/#{slug}"
+    post.puts "permalink: /#{link}/#{slug}/"
     post.puts 'description: ""'
-    post.puts "categories: #{category}"
-    post.puts "tags: #{tags}"
+    post.puts "categories:\n - #{category}"
+    post.puts "tags:\n - #{tags}"
     post.puts "---"
   end
 end # task :post

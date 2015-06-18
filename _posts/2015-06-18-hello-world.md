@@ -1,9 +1,13 @@
 ---
-layout: post
 title: "hello world"
+author: Ivan
+layout: post
+permalink: /2015/06/18/hello-world/
 description: ""
-category: 
-tags: []
+categories:
+ - hello
+tags:
+ -
 ---
 
 ### Hello World
