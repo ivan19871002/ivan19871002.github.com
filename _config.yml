@@ -16,7 +16,8 @@ author:
 
 
 # Build settings
-paginate: 10
+gems: [jekyll-paginate]
+paginate: 20
 paginate_path: "page/:num/"
 highlighter: pygments
 markdown: kramdown
